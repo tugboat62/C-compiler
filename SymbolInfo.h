@@ -1,3 +1,6 @@
+#ifndef COMPILER_SYMBOLINFO_H
+#define COMPILER_SYMBOLINFO_H
+
 #include <string>
 
 class SymbolInfo
@@ -33,3 +36,5 @@ public:
         delete next;
     }
 };
+
+#endif
