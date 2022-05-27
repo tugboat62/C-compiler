@@ -35,11 +35,11 @@ public:
     void EnterScope()
     {
         count++;
-        ScopeTable *newScopeTable = new ScopeTable(this->size);
         currentScope->increaseChildrenNum(1);
-        ScopeTable *parentScope = currentScope;
+        ScopeTable *newScopeTable = new ScopeTable(this->size, currentScope);
         currentScope = newScopeTable;
-        currentScope->setParentScope(parentScope);
+        cout << "New ScopeTable with id " << currentScope->getTableID() << " created";
+        cout << endl;
     }
 
     void ExitScope()
@@ -47,6 +47,8 @@ public:
         ScopeTable *temp = currentScope;
         currentScope = temp->getParentScope();
         delete temp;
+        cout << "ScopeTable with id " << temp->getTableID() << " removed";
+        cout << endl;
     }
 
     bool Insert(std::string s, std::string type)
@@ -60,6 +62,10 @@ public:
     {
         if (currentScope->Delete(s))
             return true;
+
+        cout << "Not found";
+        cout << endl;
+
         return false;
     }
 
@@ -75,6 +81,9 @@ public:
                 return symbol;
             temp = temp->getParentScope();
         }
+
+        cout << "Not found";
+        cout << endl;
 
         return NULL;
     }
